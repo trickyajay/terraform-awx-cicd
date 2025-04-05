@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       - echo "Terraform deployment completed."
-      - echo "VM Public IP: $(terraform output -raw vm_public_ip)"
+      - echo "VM Public IP $(terraform output -raw vm_public_ip)"
 artifacts:
   files:
     - "**/*"
