@@ -19,9 +19,9 @@ phases:
   post_build:
   commands:
     - echo "Terraform deployment completed. VM IP: $(terraform output -raw vm_public_ip)"
-    - curl -X POST -H "Authorization: Bearer <awx-api-token>" -H "Content-Type: application/json" \
+    - curl -X POST -H "Authorization: Bearer EXavlnvpStVS18fMr943Bc4WrSJcsW" -H "Content-Type: application/json" \
       -d '{"extra_vars": {"vm_ip": "$(terraform output -raw vm_public_ip)"}}' \
-      https://<awx-public-ip>/api/v2/job_templates/<job-template-id>/launch/
+      http://13.233.27.242:30000//api/v2/job_templates/<job-template-id>/launch/
 
 artifacts:
   files:
