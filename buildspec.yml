@@ -1,12 +1,14 @@
+---
 version: 0.2
-
 phases:
   install:
     runtime-versions:
       python: 3.9
     commands:
       - echo "Installing Terraform..."
-      - curl -fsSL https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip -o terraform.zip
+      - curl -fsSL
+        https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
+        -o terraform.zip
       - unzip terraform.zip
       - mv terraform /usr/local/bin/
       - terraform --version
@@ -18,9 +20,13 @@ phases:
       - terraform apply -auto-approve
   post_build:
     commands:
-      - echo "Terraform deployment completed. VM IP $(terraform output -raw vm_public_ip)"
-
-
+      - echo "Terraform deployment completed. VM IP $(terraform output -raw
+        vm_public_ip)"
+      - >
+        curl -X POST -H "Authorization: Bearer EXavlnvpStVS18fMr943Bc4WrSJcsW"
+        -H "Content-Type: application/json"  -d '{"extra_vars": {"vm_ip":
+        "$(terraform output -raw vm_public_ip)"}}'
+        http://13.233.27.242:30000/api/v2/job_templates/9/launch/
 artifacts:
   files:
     - "**/*"
