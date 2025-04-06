@@ -17,9 +17,12 @@ phases:
       - echo "Applying Terraform configuration..."
       - terraform apply -auto-approve
   post_build:
-    commands:
-      - echo "Terraform deployment completed."
-      - echo "VM Public IP $(terraform output -raw vm_public_ip)"
+  commands:
+    - echo "Terraform deployment completed. VM IP: $(terraform output -raw vm_public_ip)"
+    - curl -X POST -H "Authorization: Bearer <awx-api-token>" -H "Content-Type: application/json" \
+      -d '{"extra_vars": {"vm_ip": "$(terraform output -raw vm_public_ip)"}}' \
+      https://<awx-public-ip>/api/v2/job_templates/<job-template-id>/launch/
+
 artifacts:
   files:
     - "**/*"
