@@ -17,11 +17,9 @@ phases:
       - echo "Applying Terraform configuration..."
       - terraform apply -auto-approve
   post_build:
-  commands:
-    - echo "Terraform deployment completed. VM IP: $(terraform output -raw vm_public_ip)"
-    - curl -X POST -H "Authorization: Bearer EXavlnvpStVS18fMr943Bc4WrSJcsW" -H "Content-Type: application/json" \
-      -d '{"extra_vars": {"vm_ip": "$(terraform output -raw vm_public_ip)"}}' \
-      http://13.233.27.242:30000//api/v2/job_templates/9/launch/
+    commands:
+      - echo "Terraform deployment completed. VM IP: $(terraform output -raw vm_public_ip)"
+
 
 artifacts:
   files:
