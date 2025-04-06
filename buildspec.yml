@@ -18,7 +18,7 @@ phases:
       - terraform apply -auto-approve
   post_build:
     commands:
-      - echo "Terraform deployment completed. VM IP: $(terraform output -raw vm_public_ip)"
+      - echo "Terraform deployment completed. VM IP $(terraform output -raw vm_public_ip)"
 
 
 artifacts:
