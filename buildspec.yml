@@ -27,7 +27,7 @@ phases:
       - |
         curl -X POST -H "Authorization: Bearer EXavlnvpStVS18fMr943Bc4WrSJcsW" \
         -H "Content-Type: application/json" \
-        -d "{\"inventory\": 2, \"extra_vars\": {\"ansible_host\": \"$vmip\"}}" \
+        -d '{"limit": \"$vmip\"}' \
         http://13.233.92.247:30000/api/v2/job_templates/9/launch/
 artifacts:
   files:
