@@ -25,10 +25,11 @@ phases:
       - vmip=$(terraform output -raw vm_public_ip) 
       - export vmip
       - |
+        curl -X POST   -H "Authorization: Bearer EXavlnvpStVS18fMr943Bc4WrSJcsW"   -H "Content-Type: application/json"   "http://13.233.92.247:30000/api/v2/inventories/2/hosts/"   --data "{\"name\": \"$vmip\", \"description\": \"Target server IP\"}"
+      - |
         curl -X POST -H "Authorization: Bearer EXavlnvpStVS18fMr943Bc4WrSJcsW" \
         -H "Content-Type: application/json" \
-        -d '{"limit": \"$vmip\"}' \
-        http://13.233.92.247:30000/api/v2/job_templates/9/launch/
+         http://13.233.92.247:30000/api/v2/job_templates/9/launch/
 artifacts:
   files:
     - "**/*"
