@@ -1,6 +1,6 @@
 ---
 - name: Configure Linux VM
-  hosts: all
+  hosts: ansible_host
   become: yes
   tasks:
     - name: Update package cache
